@@ -23,8 +23,9 @@ if [ -z "${serverUrl}" ] || [ -z "${ceTaskUrl}" ]; then
 fi
 
 task="$(curl --silent --fail --show-error --user "${SONAR_TOKEN}": "${ceTaskUrl}")"
+echo task
 status="$(jq -r '.task.status' <<< "$task")"
-
+echo status
 until [[ ${status} != "PENDING" && ${status} != "IN_PROGRESS" ]]; do
     printf '.'
     sleep 5s
